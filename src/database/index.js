@@ -1,9 +1,9 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const mongoose = require("mongoose");
 
 const connect = () => {
-  mongoose.connect(
-    `mongodb+srv://jacksonsilva:jackson142536@cluster0.7lh5wzg.mongodb.net/test?retryWrites=true&w=majority`
-  );
+  mongoose.connect(process.env.DB_CONNECTION_STRING);
   const connection = mongoose.connection;
 
   connection.on("error", () => {

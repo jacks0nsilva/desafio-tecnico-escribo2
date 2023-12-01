@@ -9,16 +9,16 @@ const TokenGenerator = require("../config/TokenGenerator");
 
 const router = express.Router();
 
-router.post("/sign-up", async (req, res) => {
+router.post("/signup", async (req, res) => {
   const { email } = req.body;
   await SignUpValidator(email, res);
   const user = await UserModel.create(req.body);
   const token = TokenGenerator(user);
   const data = UserResponse(user, token);
-  return res.json(data);
+  return res.status(201).json(data);
 });
 
-router.post("/sign-in", async (req, res) => {
+router.post("/signin", async (req, res) => {
   const { email, senha } = req.body;
   const user = await UserModel.findOne({ email });
   await UserExistValidator(user, res);

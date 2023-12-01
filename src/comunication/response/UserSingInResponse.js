@@ -1,4 +1,4 @@
-function SignUpResponse(body, token) {
+function UserSignInResponse(body, token) {
   const { id, data_criacao, data_atualizacao, ultimo_login } = body;
 
   return {
@@ -10,4 +10,4 @@ function SignUpResponse(body, token) {
   };
 }
 
-module.exports = SignUpResponse;
+module.exports = UserSignInResponse;

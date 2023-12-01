@@ -38,10 +38,6 @@ const UserSchema = new mongoose.Schema({
       },
     },
   ],
-  token: {
-    type: String,
-    default: "odoododo",
-  },
 });
 
 UserSchema.pre("save", async function (next) {

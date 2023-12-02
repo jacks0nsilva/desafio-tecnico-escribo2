@@ -23,7 +23,8 @@ router.post("/signin", async (req, res) => {
   const user = await UserModel.findOne({ email });
   await UserExistValidator(user, res);
   const token = TokenGenerator(user);
-  if (!bcryptjs.compare(senha, user.senha)) {
+  console.log(bcryptjs.compare(senha, user.senha));
+  if (!(await bcryptjs.compare(senha, user.senha))) {
     return res.status(401).json({
       message: "Senha inválida",
     });

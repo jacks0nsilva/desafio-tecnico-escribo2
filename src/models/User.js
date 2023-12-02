@@ -40,10 +40,5 @@ const UserSchema = new mongoose.Schema({
   ],
 });
 
-UserSchema.pre("save", async function (next) {
-  const hash = await bcryptjs.hashSync(this.senha, 10);
-  this.senha = hash;
-});
-
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

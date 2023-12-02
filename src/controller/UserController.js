@@ -6,12 +6,15 @@ const SignUpValidator = require("../validator/SignUpValidator");
 const UserExistValidator = require("../validator/UserExistValidator");
 const UserSignInResponse = require("../comunication/response/UserSingInResponse");
 const TokenGenerator = require("../config/TokenGenerator");
+const PasswordValidator = require("../validator/PasswordValidator");
 
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  const { email } = req.body;
+  const { email, senha } = req.body;
   await SignUpValidator(email, res);
+  const hash = bcryptjs.hash(senha, 10);
+  user.senha = hash;
   const user = await UserModel.create(req.body);
   const token = TokenGenerator(user);
   const data = UserResponse(user, token);
@@ -22,13 +25,8 @@ router.post("/signin", async (req, res) => {
   const { email, senha } = req.body;
   const user = await UserModel.findOne({ email });
   await UserExistValidator(user, res);
+  await PasswordValidator(senha, user, res);
   const token = TokenGenerator(user);
-  console.log(bcryptjs.compare(senha, user.senha));
-  if (!(await bcryptjs.compare(senha, user.senha))) {
-    return res.status(401).json({
-      message: "Senha inválida",
-    });
-  }
   user.ultimo_login = Date.now();
   await user.save();
   return res.json(UserSignInResponse(user, token));

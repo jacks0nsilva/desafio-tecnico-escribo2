@@ -105,7 +105,7 @@ Criptografia hash na senha e token. ✅
         "message": "E-mail não cadastrado ou incorreto"
       }
 
-### Login
+### Autenticação
 
 ```
   GET /api/user

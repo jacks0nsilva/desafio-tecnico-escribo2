@@ -24,7 +24,7 @@ Criptografia hash na senha e token. ✅
 
 ### Cadastro
 
-```http
+```
   POST /api/signup
 ```
 
@@ -66,7 +66,7 @@ Criptografia hash na senha e token. ✅
 
 ### Login
 
-```http
+```
   POST /api/signin
 ```
 
@@ -107,7 +107,7 @@ Criptografia hash na senha e token. ✅
 
 ### Login
 
-```http
+```
   GET /api/user
 ```
 

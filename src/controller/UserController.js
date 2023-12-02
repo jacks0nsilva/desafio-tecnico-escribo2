@@ -11,10 +11,10 @@ const PasswordValidator = require("../validator/PasswordValidator");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  const { email, senha } = req.body;
+  let { email, senha } = req.body;
   await SignUpValidator(email, res);
-  const hash = bcryptjs.hash(senha, 10);
-  senha = hash;
+  const hash = await bcryptjs.hash(senha, 10);
+  req.body.senha = hash;
   const user = await UserModel.create(req.body);
   const token = TokenGenerator(user);
   const data = UserResponse(user, token);

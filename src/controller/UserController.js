@@ -14,8 +14,8 @@ router.post("/signup", async (req, res) => {
   const { email, senha } = req.body;
   await SignUpValidator(email, res);
   const hash = bcryptjs.hash(senha, 10);
-  user.senha = hash;
   const user = await UserModel.create(req.body);
+  user.senha = hash;
   const token = TokenGenerator(user);
   const data = UserResponse(user, token);
   return res.status(201).json(data);
